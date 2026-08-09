@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Cleaner Payroll &middot; MaidThis Alexandria</title>
+<link rel="icon" type="image/png" href="/assets/favicon.png" />
+<link rel="stylesheet" href="/css/brand.css" />
+<link rel="stylesheet" href="/css/payroll.css" />
+</head>
+<body>
+<%- include('partials/nav', { active: active }) %>
+
+<div class="pay-hero">
+  <div class="container">
+    <h1>Cleaner payroll</h1>
+    <p class="pay-subtitle">Weekly pay by cleaner, Monday through Sunday.</p>
+
+    <div class="pay-week-bar">
+      <div class="pay-week-nav">
+        <button type="button" class="week-arrow" id="prevWeekBtn" aria-label="Previous week">&larr;</button>
+        <span class="pay-week-label" id="weekLabel">&ndash;</span>
+        <button type="button" class="week-arrow" id="nextWeekBtn" aria-label="Next week">&rarr;</button>
+        <button type="button" class="week-today" id="thisWeekBtn">This week</button>
+      </div>
+      <div class="pay-week-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="fillAllBtn" hidden></button>
+        <button type="button" class="btn btn-secondary btn-sm" id="addCleanerBtn" hidden>Add cleaner</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="batchBtn" hidden>Statements</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="exportBtn">Export CSV</button>
+        <button type="button" class="btn btn-secondary btn-sm is-lock" id="lockToggleBtn" hidden></button>
+      </div>
+      <span class="pay-synced" id="paySynced"></span>
+    </div>
+
+    <div class="pay-lock-banner" id="payLockBanner" hidden></div>
+
+    <div class="pay-orphans" id="payOrphans" hidden></div>
+
+    <div class="pay-summary" id="paySummary"></div>
+    <div class="pay-progress" id="payProgress" hidden></div>
+  </div>
+</div>
+
+<div class="pay-section">
+  <div class="container">
+    <div class="pay-state" id="payState" hidden></div>
+    <div id="cleanerGroups"></div>
+  </div>
+</div>
+
+<!-- Statement preview. -->
+<div class="pay-modal" id="statementModal" hidden>
+  <div class="pay-modal-backdrop" data-close-modal></div>
+  <div class="pay-modal-panel" role="dialog" aria-modal="true" aria-labelledby="statementModalTitle">
+    <div class="pay-modal-head">
+      <div>
+        <h2 id="statementModalTitle">Pay statement</h2>
+        <p class="pay-modal-sub" id="statementModalSub"></p>
+      </div>
+      <button type="button" class="pay-modal-close" data-close-modal aria-label="Close">&times;</button>
+    </div>
+
+    <div class="pay-modal-toolbar" id="statementToolbar"></div>
+
+    <div class="pay-modal-body" id="statementBody"></div>
+
+    <div class="pay-modal-foot" id="statementFoot"></div>
+  </div>
+</div>
+
+<!-- Adds a cleaner who has no bookings this week, for room turns and touch-up cleans that never
+     get logged in ConvertLabs. The card is local until a line item is saved against it. -->
+<div class="pay-modal" id="addCleanerModal" hidden>
+  <div class="pay-modal-backdrop" data-close-modal></div>
+  <div class="pay-modal-panel is-narrow" role="dialog" aria-modal="true" aria-labelledby="addCleanerTitle">
+    <div class="pay-modal-head">
+      <div>
+        <h2 id="addCleanerTitle">Add a cleaner to this week</h2>
+        <p class="pay-modal-sub">For room turns or touch-ups that were never booked through the CRM.</p>
+      </div>
+      <button type="button" class="pay-modal-close" data-close-modal aria-label="Close">&times;</button>
+    </div>
+    <div class="pay-modal-body" id="addCleanerBody"></div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
+
+<script src="/js/payroll.js"></script>
+</body>
+</html>

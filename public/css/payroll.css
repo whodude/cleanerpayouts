@@ -1,0 +1,565 @@
+/* Cleaner Payroll. Built on brand.css tokens, same visual language as dashboard.css. */
+
+.pay-hero {
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-soft);
+}
+.pay-hero h1 { font-size: 26px; font-weight: 800; color: var(--mt-navy); }
+.pay-subtitle { margin-top: 6px; font-size: 14px; color: var(--fg-secondary); max-width: 640px; }
+
+/* ---------- week bar ---------- */
+
+.pay-week-bar {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.pay-week-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--mt-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--pill);
+  padding: 4px;
+  box-shadow: var(--shadow-sm);
+}
+.week-arrow {
+  width: 32px; height: 32px;
+  border-radius: var(--pill);
+  border: none;
+  background: transparent;
+  color: var(--fg-primary);
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+.week-arrow:hover { background: var(--teal-100); }
+.pay-week-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mt-navy);
+  padding: 0 12px;
+  min-width: 165px;
+  text-align: center;
+}
+.week-today {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--fg-secondary);
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--border-subtle);
+  padding: 6px 14px;
+  cursor: pointer;
+}
+.week-today:hover { color: var(--ocean-700); }
+
+.pay-week-actions { display: inline-flex; gap: 8px; flex-wrap: wrap; }
+.pay-synced { font-size: 12px; color: var(--fg-tertiary); margin-left: auto; }
+
+/* Locking closes out a pay period, it is not a navigation control, so it sits apart from the
+   week buttons rather than looking like one of them. */
+.btn.is-lock { border-color: var(--border-default); color: var(--fg-secondary); }
+#lockToggleBtn.is-locked { border-color: var(--state-warning); color: #92400E; background: #FFFBEB; }
+#lockToggleBtn.is-locked:hover { border-color: var(--state-warning); }
+
+.pay-lock-banner {
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+  font-size: 13px;
+}
+
+/* ---------- summary and progress ---------- */
+
+.pay-summary {
+  margin-top: 18px;
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.pay-summary-stat { display: flex; flex-direction: column; gap: 2px; }
+.pay-summary-stat .label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--fg-tertiary);
+}
+.pay-summary-stat .value {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 22px; font-weight: 800; color: var(--mt-navy);
+}
+
+.pay-progress { margin-top: 16px; max-width: 620px; }
+.progress-track {
+  height: 6px;
+  border-radius: var(--pill);
+  background: var(--bg-muted);
+  overflow: hidden;
+}
+.progress-track span {
+  display: block; height: 100%;
+  background: var(--mt-teal);
+  border-radius: var(--pill);
+  transition: width 0.25s var(--ease);
+}
+.progress-track span.is-done { background: var(--mt-green); }
+.progress-text { margin-top: 7px; font-size: 12.5px; color: var(--fg-secondary); }
+.progress-text strong { color: var(--mt-navy); }
+.progress-notes { margin-left: 8px; }
+.progress-notes .warn { color: var(--mt-red); font-weight: 600; }
+.progress-notes .muted { color: var(--fg-tertiary); }
+
+/* ---------- cleaner cards ---------- */
+
+.pay-section { padding: 26px 0 60px; }
+
+.cleaner-card {
+  background: var(--mt-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  /* Without this a wide table stretches the card past the viewport instead of scrolling
+     inside .table-wrap, which is what used to push the whole page sideways on a phone. */
+  min-width: 0;
+  overflow: hidden;
+}
+.cleaner-card.unassigned { background: var(--bg-soft); }
+.cleaner-card.is-locked { background: #FFFDF7; }
+
+.cleaner-card-head {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: start;
+  gap: 12px;
+}
+.card-toggle {
+  width: 26px; height: 26px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: var(--mt-white);
+  color: var(--fg-secondary);
+  cursor: pointer;
+  margin-top: 2px;
+}
+.card-toggle:hover { border-color: var(--mt-teal); color: var(--teal-700); }
+.card-toggle svg { width: 14px; height: 14px; transition: transform 0.18s var(--ease); }
+.cleaner-card.is-collapsed .card-toggle svg { transform: rotate(-90deg); }
+.cleaner-card.is-collapsed .cleaner-card-body { display: none; }
+
+.cleaner-head-main { min-width: 0; }
+.cleaner-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px; font-weight: 800; color: var(--mt-navy);
+  display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.job-count { font-size: 12px; font-weight: 600; color: var(--fg-tertiary); }
+
+.ready-chip {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: var(--pill);
+}
+.ready-chip.is-ready { background: rgba(124, 202, 91, 0.16); color: #3F7D22; }
+.ready-chip.is-todo { background: rgba(229, 72, 77, 0.1); color: var(--mt-red); }
+.ready-chip.is-zero { background: var(--bg-muted); color: var(--fg-tertiary); }
+/* Numbers finished, but nowhere to send it. Amber rather than green or red: nothing is wrong
+   with the pay, it just cannot leave yet. */
+.ready-chip.is-blocked { background: rgba(255, 182, 0, 0.16); color: #7A4F00; }
+
+.cleaner-totals { margin-top: 5px; display: flex; gap: 16px; flex-wrap: wrap; }
+.mini-total { font-size: 12.5px; color: var(--fg-secondary); }
+.mini-total strong { color: var(--mt-navy); }
+.email-line { color: var(--fg-tertiary); }
+.no-email { color: var(--mt-red); font-weight: 600; }
+
+.sent-status { margin-top: 6px; font-size: 12px; color: var(--fg-tertiary); }
+.sent-status .stale { color: var(--mt-red); font-weight: 600; }
+.sent-status.is-unsaved { color: var(--teal-700); font-weight: 600; }
+
+/* Picker for a cleaner with no bookings this week. */
+.add-cleaner-form { display: flex; flex-direction: column; gap: 8px; padding: 18px 22px 22px; }
+.add-cleaner-form label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--fg-tertiary); }
+.add-cleaner-form select {
+  width: 100%; font: inherit; font-size: 14px; color: var(--fg-primary);
+  background: var(--bg-page); border: 1px solid var(--border-subtle);
+  border-radius: 8px; padding: 10px 12px;
+}
+.add-cleaner-hint { margin: 2px 0 0; font-size: 12px; line-height: 1.5; color: var(--fg-tertiary); }
+.add-cleaner-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+.add-cleaner-actions .btn { height: 40px; line-height: 1.2; }
+
+.cleaner-card-actions {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end;
+}
+.cleaner-grand-total {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px; font-weight: 800; color: var(--mt-navy);
+}
+.btn-quiet {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--fg-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.btn-quiet:hover { color: var(--ocean-700); }
+.btn-quiet[disabled] { color: var(--fg-tertiary); cursor: default; text-decoration: none; }
+.link-btn {
+  background: none; border: none; padding: 0 0 0 4px; cursor: pointer;
+  color: var(--mt-ocean); font-size: 12px; font-family: inherit; text-decoration: underline;
+}
+
+.cleaner-card-body { margin-top: 16px; }
+
+/* ---------- job table ---------- */
+
+.table-wrap {
+  background: var(--mt-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  min-width: 0;
+}
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th {
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--fg-tertiary);
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-soft);
+  white-space: nowrap;
+}
+.data-table td { padding: 11px 14px; border-bottom: 1px solid var(--border-subtle); color: var(--fg-secondary); vertical-align: middle; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr.is-flagged { background: rgba(229, 72, 77, 0.035); }
+.col-date { white-space: nowrap; font-weight: 600; color: var(--mt-navy); }
+.col-client { white-space: nowrap; }
+/* The address is context, not something you read down the column, so it sits under the service
+   name rather than taking a full column of its own. */
+.col-service { color: var(--mt-navy); }
+.col-address { display: block; font-size: 11.5px; color: var(--fg-tertiary); margin-top: 2px; }
+th.col-pay, td.col-pay { text-align: right; white-space: nowrap; }
+
+.job-status-pill {
+  margin-left: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9.5px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: var(--pill);
+  background: var(--bg-muted); color: var(--fg-tertiary);
+}
+.job-status-pill.scheduled { background: var(--teal-100); color: var(--teal-700); }
+.job-status-pill.cancelled { background: rgba(229, 72, 77, 0.12); color: var(--mt-red); }
+
+.pay-input-wrap {
+  display: inline-flex; align-items: center;
+  border: 1.5px solid var(--border-default);
+  border-radius: 8px;
+  background: var(--mt-white);
+  overflow: hidden;
+}
+.pay-input-wrap.is-flagged { border-color: var(--mt-red); }
+.pay-input-wrap .prefix { padding: 0 2px 0 9px; color: var(--fg-tertiary); font-size: 13px; }
+.pay-input {
+  width: 88px;
+  border: none;
+  padding: 7px 9px 7px 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--mt-navy);
+  background: transparent;
+  text-align: right;
+}
+.pay-input:focus { outline: none; }
+.pay-input-wrap:focus-within { border-color: var(--mt-teal); box-shadow: var(--focus-ring); }
+.pay-input.unsaved { opacity: 0.5; }
+.pay-input.saved { background: rgba(124, 202, 91, 0.14); }
+.pay-input::placeholder { color: var(--border-default); font-weight: 400; }
+.flag-note {
+  display: block; margin-top: 3px;
+  font-size: 10.5px; font-weight: 700; color: var(--mt-red);
+}
+
+/* ---------- adjustments ---------- */
+
+.adj-section { margin-top: 14px; }
+.adj-toggle {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  background: none; border: none; padding: 4px 0; cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--fg-secondary);
+}
+.adj-toggle:hover { color: var(--ocean-700); }
+.adj-hint {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11.5px; font-weight: 400; letter-spacing: 0; text-transform: none;
+  color: var(--fg-tertiary);
+}
+.adj-body { margin-top: 8px; }
+.adj-body.is-hidden { display: none; }
+.adj-list { display: flex; flex-direction: column; gap: 6px; }
+.adj-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 12px;
+  background: var(--bg-soft);
+  border-radius: 8px;
+  font-size: 13px;
+}
+.adj-label { flex: 1; color: var(--fg-secondary); }
+.adj-amount { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+.adj-amount.positive { color: #3F7D22; }
+.adj-amount.negative { color: var(--mt-red); }
+.adj-remove-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--fg-tertiary); font-size: 18px; line-height: 1; padding: 0 4px;
+}
+.adj-remove-btn:hover { color: var(--mt-red); }
+.adj-remove-btn[disabled] { opacity: 0.35; cursor: default; }
+
+.adj-add-form { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.adj-add-form.is-disabled { opacity: 0.5; }
+.adj-add-form input[type="text"] { flex: 1 1 260px; min-width: 0; }
+.adj-add-form input[type="number"] { width: 120px; }
+.adj-add-form input {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  padding: 8px 12px;
+  border: 1.5px solid var(--border-default);
+  border-radius: 8px;
+  color: var(--fg-primary);
+}
+.adj-add-form input:focus { outline: none; border-color: var(--mt-teal); box-shadow: var(--focus-ring); }
+
+.adj-type-toggle { display: inline-flex; border: 1.5px solid var(--border-default); border-radius: 8px; overflow: hidden; }
+.adj-type-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.adj-type-toggle label {
+  padding: 8px 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--fg-secondary);
+  cursor: pointer;
+}
+.adj-type-toggle input:checked + label { background: var(--mt-teal); color: var(--fg-inverse); }
+
+/* ---------- modals ---------- */
+
+body.modal-open { overflow: hidden; }
+.pay-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 24px; }
+.pay-modal[hidden] { display: none; }
+.pay-modal-backdrop { position: absolute; inset: 0; background: rgba(15, 24, 33, 0.55); }
+.pay-modal-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 780px;
+  max-height: 92vh;
+  background: var(--mt-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.pay-modal-panel.is-narrow { max-width: 520px; }
+.pay-modal-head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  padding: 20px 22px 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.pay-modal-head h2 { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--mt-navy); }
+.pay-modal-sub { margin-top: 3px; font-size: 12.5px; color: var(--fg-secondary); }
+.pay-modal-close {
+  background: none; border: none; cursor: pointer;
+  font-size: 26px; line-height: 1; color: var(--fg-tertiary); padding: 0 4px;
+}
+.pay-modal-close:hover { color: var(--mt-navy); }
+
+.pay-modal-toolbar {
+  padding: 14px 22px;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex; flex-direction: column; gap: 9px;
+}
+.tb-field { display: flex; align-items: center; gap: 10px; font-size: 12.5px; }
+.tb-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--fg-tertiary);
+  width: 52px; flex-shrink: 0;
+}
+.tb-value {
+  flex: 1; min-width: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--mt-navy);
+  background: var(--mt-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 6px 10px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tb-value.is-missing { color: var(--mt-red); border-color: rgba(229, 72, 77, 0.35); background: rgba(229, 72, 77, 0.05); }
+.tb-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 2px; }
+/* The Gmail link is an <a>, so it inherits the body's 1.6 line-height where a <button> gets the
+   UA's `normal`, and btn-secondary's 2px border sits outside the auto height. Left alone the
+   anchor rendered 47px next to a 38px button. Fixing the height settles both. */
+.tb-actions .btn { height: 40px; line-height: 1.2; }
+/* Matches .share-hint in pricing.css. Duplicated rather than shared because this page does not
+   load pricing.css, and the copy-then-open-Gmail flow needs the same one line of instruction. */
+.share-hint { font-size: 11.5px; color: var(--fg-tertiary); line-height: 1.5; margin: 0; }
+
+/* The preview iframe does its own scrolling. Letting this wrapper scroll too produced two
+   scrollbars side by side. */
+.pay-modal-body { flex: 1; min-height: 0; overflow: hidden; background: var(--bg-soft); }
+#statementFrame { display: block; width: 100%; height: 100%; min-height: 48vh; border: 0; background: var(--bg-soft); }
+
+.pay-modal-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  padding: 14px 22px;
+  border-top: 1px solid var(--border-subtle);
+}
+.statement-nav { display: flex; gap: 12px; }
+.statement-foot-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.sent-hint { font-size: 12px; color: var(--fg-tertiary); }
+
+/* ---------- stranded pay rows ---------- */
+
+/* Amber, like the lock banner's cousin: this is money that has quietly stopped counting, which
+   is worth stopping for, but nothing is broken and nobody needs to panic. */
+.pay-orphans {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  background: rgba(255, 182, 0, 0.10);
+  border: 1px solid var(--mt-yellow);
+  border-radius: var(--radius-md);
+}
+.pay-orphans[hidden] { display: none; }
+
+.orphan-head { display: flex; flex-direction: column; gap: 3px; margin-bottom: 4px; }
+.orphan-head strong {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13.5px;
+  color: var(--mt-navy);
+}
+.orphan-head span { font-size: 12.5px; line-height: 1.5; color: var(--fg-secondary); }
+
+.orphan-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: var(--mt-white);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--fg-secondary);
+}
+.orphan-amount {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  color: var(--mt-navy);
+  font-variant-numeric: tabular-nums;
+}
+.orphan-text { flex: 1; min-width: 180px; line-height: 1.5; }
+
+/* ---------- adjustment presets ---------- */
+
+.adj-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.adj-preset {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--teal-700);
+  background: var(--teal-100);
+  border: 1px solid var(--teal-200);
+  border-radius: var(--pill);
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.14s var(--ease), border-color 0.14s var(--ease);
+}
+.adj-preset:hover { background: var(--teal-200); border-color: var(--mt-teal); }
+.adj-preset:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* ---------- states ---------- */
+
+.pay-state { text-align: center; padding: 50px 20px; color: var(--fg-secondary); }
+.pay-state[hidden] { display: none; }
+.empty-note { font-size: 13px; color: var(--fg-tertiary); font-style: italic; padding: 16px; text-align: center; }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .pay-synced { margin-left: 0; width: 100%; }
+  .cleaner-card-head { grid-template-columns: 24px 1fr; }
+  .cleaner-card-actions { grid-column: 2 / -1; justify-content: flex-start; margin-top: 10px; }
+}
+
+@media (max-width: 640px) {
+  .pay-hero { padding: 20px 0 18px; }
+  .pay-hero h1 { font-size: 22px; }
+  .pay-subtitle { display: none; }
+  .pay-week-nav { flex: 1 1 100%; justify-content: center; }
+  .pay-week-label { flex: 1; min-width: 0; }
+  .pay-week-actions { width: 100%; }
+  .pay-week-actions .btn { flex: 1 1 auto; justify-content: center; }
+  .pay-summary { gap: 20px; }
+  .pay-summary-stat .value { font-size: 18px; }
+
+  .cleaner-card { padding: 16px; }
+  .cleaner-grand-total { font-size: 20px; }
+
+  /* Four columns will not fit a phone, and sideways-scrolling to reach the Pay box (the one
+     control that matters here) is no better than the page overflow this replaced. Each row
+     becomes its own block with the pay input pinned to the right, always in view. */
+  .table-wrap { overflow-x: visible; }
+  .data-table { font-size: 12.5px; }
+  .data-table thead { display: none; }
+  .data-table, .data-table tbody, .data-table tr, .data-table td { display: block; width: 100%; }
+  .data-table tr {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'date client pay'
+      'service service pay';
+    align-items: center;
+    gap: 2px 10px;
+    padding: 11px 12px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .data-table tr:last-child { border-bottom: none; }
+  .data-table td { padding: 0; border: none; }
+  .data-table td.col-date { grid-area: date; }
+  .data-table td.col-client { grid-area: client; }
+  .data-table td.col-service { grid-area: service; }
+  .data-table td.col-pay { grid-area: pay; text-align: right; }
+  .col-address { margin-top: 1px; }
+  .pay-input { width: 68px; }
+  .data-table td.empty-note, .data-table tr td[colspan] { grid-area: auto; text-align: center; }
+
+  .adj-add-form input[type="text"] { flex-basis: 100%; }
+  .adj-add-form input[type="number"] { flex: 1 1 auto; width: auto; }
+
+  .pay-modal { padding: 0; }
+  .pay-modal-panel { max-width: none; max-height: 100vh; height: 100%; border-radius: 0; }
+  #statementFrame { height: 52vh; }
+  .tb-field { flex-wrap: wrap; }
+  .tb-label { width: auto; }
+}

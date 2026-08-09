@@ -1,0 +1,281 @@
+/* MaidThis brand kit v2.0, franchisor palette. Internal tools surface. */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --mt-teal: #5AB3C9;
+  --mt-white: #FFFFFF;
+  --mt-black: #0F1821;
+  --mt-navy: #2C3E50;
+  --mt-ocean: #0C85C2;
+  --mt-aqua: #A7DBE7;
+  --mt-gray: #E6F1F4;
+  --mt-green: #7CCA5B;
+  --mt-yellow: #FFB600;
+  --mt-red: #E5484D;
+  --mt-window: #7BAFC4; /* arrival window state, ops console */
+
+  --teal-100: #EAF6F9;
+  --teal-200: #C6E6ED;
+  --teal-300: #9CD3DE;
+  --teal-400: #7AC3D2;
+  --teal-500: #5AB3C9;
+  --teal-600: #3E95AC;
+  --teal-700: #2B7387;
+  --teal-800: #1E5464;
+
+  --ocean-100: #E1F1FA;
+  --ocean-200: #A9D6EE;
+  --ocean-300: #6EB8DE;
+  --ocean-500: #0C85C2;
+  --ocean-700: #085E8A;
+
+  --navy-100: #E9ECF0;
+  --navy-300: #8A9AAB;
+  --navy-500: #2C3E50;
+  --navy-700: #1C2A38;
+
+  --bg-page: #FFFFFF;
+  --bg-muted: #E6F1F4;
+  --bg-soft: #F6FAFB;
+  --bg-inverse: #0F1821;
+  --bg-brand: #5AB3C9;
+
+  --fg-primary: #2C3E50;
+  --fg-secondary: #546778;
+  --fg-tertiary: #8A9AAB;
+  --fg-inverse: #FFFFFF;
+  --fg-brand: #0C85C2;
+
+  --border-subtle: #DCE7EC;
+  --border-default: #C6D4DB;
+  --border-strong: #2C3E50;
+
+  --state-success: #7CCA5B;
+  --state-warning: #FFB600;
+  --state-info: #0C85C2;
+  --state-error: #E5484D;
+
+  --shadow-sm: 0 2px 10px rgba(44, 62, 80, 0.06);
+  --shadow-md: 0 10px 28px rgba(44, 62, 80, 0.10);
+  --shadow-lg: 0 22px 48px rgba(44, 62, 80, 0.14);
+  --shadow-ocean: 0 12px 26px rgba(12, 133, 194, 0.22);
+
+  --pill: 999px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 22px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --focus-ring: 0 0 0 3px rgba(12, 133, 194, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Open Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg-primary);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, button, .pill, nav a { font-family: 'Montserrat', system-ui, sans-serif; }
+a { color: var(--mt-ocean); text-decoration: none; }
+strong { font-weight: 700; }
+
+:is(button, a, input, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--pill);
+}
+
+/* ---------- Shared top nav ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.site-nav .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.site-nav .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.site-nav .brand img { height: 34px; width: auto; display: block; }
+.site-nav .links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+  /* The link count grows with the viewer's permissions (up to 8), which overflowed the row and
+     pushed the sign out button off screen on a phone. Let the strip shrink and scroll instead of
+     forcing the whole page to scroll sideways. */
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.site-nav .links::-webkit-scrollbar { display: none; }
+.site-nav .links a {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--fg-secondary);
+  padding: 8px 16px;
+  border-radius: var(--pill);
+  transition: color 0.16s var(--ease), background 0.16s var(--ease);
+  white-space: nowrap;
+}
+.site-nav .links a:hover { color: var(--fg-primary); background: var(--teal-100); }
+.site-nav .links a.active { color: var(--ocean-700); background: var(--teal-100); }
+
+/* Logged-in user pill at the right end of the nav */
+.nav-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.nav-user-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fg-secondary);
+  white-space: nowrap;
+}
+.nav-signout-form { display: inline; }
+.nav-signout {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fg-tertiary);
+  background: none;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--pill);
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  font-family: 'Montserrat', sans-serif;
+}
+.nav-signout:hover { color: var(--state-error); border-color: var(--state-error); }
+
+/* Narrow screens: tighten the nav so the logo and sign out button both stay reachable while the
+   link strip scrolls between them. The 68px height is deliberately kept, other pages anchor
+   sticky toolbars to it. */
+@media (max-width: 1000px) {
+  .site-nav .inner { padding: 0 16px; gap: 12px; }
+  .site-nav .links { margin-left: 0; }
+  .site-nav .links a { padding: 8px 12px; }
+}
+@media (max-width: 640px) {
+  .site-nav .brand img { height: 28px; }
+  .nav-user { gap: 8px; }
+  .nav-user-name { display: none; } /* the name is the first thing worth dropping for space */
+}
+
+/* Below this width the strip overflows for every role (the shortest set of links, five, needs
+   about 390px and there is less than that left over), so the fade always means "there is more
+   here, swipe". Kept off wider screens on purpose: CSS cannot tell whether a scroller actually
+   overflows, and a fade over links that already fit would just look like a rendering fault. */
+@media (max-width: 560px) {
+  .site-nav .links {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 24px), transparent 100%);
+  }
+}
+
+/* ---------- Shared footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-soft);
+  margin-top: 48px;
+}
+.site-footer .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.site-footer .links { display: flex; gap: 18px; flex-wrap: wrap; }
+.site-footer .links a {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--fg-secondary);
+}
+.site-footer .links a:hover { color: var(--ocean-700); }
+.site-footer .tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-tertiary);
+}
+
+/* ---------- Layout ---------- */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+@media (max-width: 640px) { .container { padding: 0 20px; } }
+
+/* ---------- Buttons, pills always ---------- */
+.btn {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--pill);
+  padding: 11px 22px;
+  transition: transform 0.16s var(--ease), box-shadow 0.16s var(--ease), background 0.16s var(--ease);
+  text-decoration: none;
+}
+/* display:inline-flex above beats the user agent's [hidden] rule, so a .btn toggled with the
+   hidden attribute would otherwise stay visible. */
+.btn[hidden] { display: none; }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--mt-teal); color: var(--fg-inverse); box-shadow: var(--shadow-ocean); }
+.btn-primary:hover { background: var(--teal-600); transform: translateY(-1px); }
+.btn-secondary { background: var(--mt-white); color: var(--mt-navy); border: 2px solid var(--border-default); }
+.btn-secondary:hover { border-color: var(--mt-teal); color: var(--teal-700); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--mt-white);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+}
+
+/* ---------- Cleaner avatar, photo or initials fallback ---------- */
+.cleaner-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--teal-100);
+  box-shadow: 0 0 0 2px var(--mt-white), 0 0 0 3px var(--border-subtle);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--teal-700);
+}
+.cleaner-avatar.sm { width: 28px; height: 28px; font-size: 11px; }
