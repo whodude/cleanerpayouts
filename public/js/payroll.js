@@ -326,9 +326,11 @@
           </div>
 
           <div class="adj-section">
-            <button type="button" class="adj-toggle" data-toggle-adj="${esc(group.name)}">
-              Adjustments${group.adjustments.length ? ` (${group.adjustments.length})` : ''}
+            <button type="button" class="adj-toggle${group.adjustments.length ? ' is-open' : ''}" data-toggle-adj="${esc(group.name)}" aria-expanded="${group.adjustments.length > 0}">
+              <svg class="adj-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <span class="adj-toggle-label">Adjustments${group.adjustments.length ? ` (${group.adjustments.length})` : ''}</span>
               <span class="adj-hint">room turns, missed payments, corrections</span>
+              <span class="adj-toggle-action">${group.adjustments.length ? 'Hide' : 'Add'}</span>
             </button>
             <div class="adj-body${group.adjustments.length ? '' : ' is-hidden'}" data-adj-body="${esc(group.name)}">
               <div class="adj-list">${adjRows}</div>
@@ -423,7 +425,8 @@
     const card = els.groups.querySelector(`[data-cleaner-card="${cssEscape(name)}"]`);
     if (!card) return;
     const body = card.querySelector(`[data-adj-body="${cssEscape(name)}"]`);
-    if (body) body.classList.remove('is-hidden');
+    const toggle = card.querySelector(`[data-toggle-adj="${cssEscape(name)}"]`);
+    if (body && toggle) setAdjOpen(toggle, body, true);
     card.scrollIntoView({ behavior: 'smooth', block: 'center' });
     const firstInput = card.querySelector('.adj-add-form input[type="text"]');
     if (firstInput) firstInput.focus({ preventScroll: true });
@@ -486,6 +489,17 @@
 
   function cssEscape(str) {
     return String(str).replace(/["\\]/g, '\\$&');
+  }
+
+  // Opens or closes an adjustments panel and keeps the button telling the truth about which it
+  // is. The chevron, the aria state, and the Add/Hide word all have to move together, or the
+  // control goes back to looking like a static label, which is what made it easy to miss.
+  function setAdjOpen(toggle, body, open) {
+    body.classList.toggle('is-hidden', !open);
+    toggle.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    const action = toggle.querySelector('.adj-toggle-action');
+    if (action) action.textContent = open ? 'Hide' : 'Add';
   }
 
   // ---------- Job pay editing ----------
@@ -559,7 +573,7 @@
     const adjToggle = e.target.closest('[data-toggle-adj]');
     if (adjToggle) {
       const body = els.groups.querySelector(`[data-adj-body="${cssEscape(adjToggle.dataset.toggleAdj)}"]`);
-      if (body) body.classList.toggle('is-hidden');
+      if (body) setAdjOpen(adjToggle, body, body.classList.contains('is-hidden'));
       return;
     }
     // Fills the description and puts the cursor in the amount, which is the only field left to

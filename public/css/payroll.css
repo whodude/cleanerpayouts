@@ -299,18 +299,58 @@ th.col-pay, td.col-pay { text-align: right; white-space: nowrap; }
 /* ---------- adjustments ---------- */
 
 .adj-section { margin-top: 14px; }
+
+/* This used to be bare uppercase text with no border or icon, so it read as a heading rather
+   than a control and people did not realise adjustments were in there at all. It is now a full
+   width strip that looks pressable: chevron, hover fill, and a word saying what a click does. */
 .adj-toggle {
-  display: inline-flex; align-items: baseline; gap: 10px;
-  background: none; border: none; padding: 4px 0; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
   font-family: 'Montserrat', sans-serif;
   font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--fg-secondary);
+  transition: background 0.14s var(--ease), border-color 0.14s var(--ease), color 0.14s var(--ease);
 }
-.adj-toggle:hover { color: var(--ocean-700); }
+.adj-toggle:hover {
+  background: var(--teal-100);
+  border-color: var(--mt-teal);
+  color: var(--teal-700);
+}
+.adj-toggle:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.adj-toggle.is-open { background: var(--teal-100); border-color: var(--teal-200); color: var(--teal-700); }
+
+.adj-chevron {
+  width: 14px; height: 14px; flex-shrink: 0;
+  transform: rotate(-90deg);
+  transition: transform 0.18s var(--ease);
+}
+.adj-toggle.is-open .adj-chevron { transform: rotate(0deg); }
+
+.adj-toggle-label { flex-shrink: 0; }
+
+/* Pushed to the right so the strip has a clear "button end" the eye lands on. */
+.adj-toggle-action {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.05em;
+  color: var(--teal-700);
+  background: var(--mt-white);
+  border: 1px solid var(--teal-200);
+  border-radius: var(--pill);
+  padding: 4px 12px;
+}
+.adj-toggle:hover .adj-toggle-action { border-color: var(--mt-teal); }
+
 .adj-hint {
   font-family: 'Open Sans', sans-serif;
   font-size: 11.5px; font-weight: 400; letter-spacing: 0; text-transform: none;
   color: var(--fg-tertiary);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
 }
 .adj-body { margin-top: 8px; }
 .adj-body.is-hidden { display: none; }
@@ -553,6 +593,10 @@ body.modal-open { overflow: hidden; }
   .col-address { margin-top: 1px; }
   .pay-input { width: 68px; }
   .data-table td.empty-note, .data-table tr td[colspan] { grid-area: auto; text-align: center; }
+
+  /* The strip has to keep the chevron, the label, and the Add/Hide pill on a phone. The hint is
+     the one part that is explanatory rather than functional, so it is what gives way. */
+  .adj-hint { display: none; }
 
   .adj-add-form input[type="text"] { flex-basis: 100%; }
   .adj-add-form input[type="number"] { flex: 1 1 auto; width: auto; }
